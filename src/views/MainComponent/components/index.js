@@ -1,0 +1,11 @@
+export { default as Hero } from './Hero';
+export { default as Work } from './Work';
+export { default as Integrations } from './Integrations';
+export { default as Subscription } from './Subscription';
+export { default as Team } from './Team';
+export { default as Brains } from './Brains';
+export { default as PromoNumbers } from './PromoNumbers';
+// export { default as VideoSection } from './VideoSection';
+export { default as PortfolioGrid } from './PortfolioGrid';
+export { default as QuickSearch } from './QuickSearch';
+// export { default as Video } from './Video';
