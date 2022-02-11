@@ -2,15 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
 import { alpha, useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
+import logo from '../../../../images/balloonbrace-logo.png';
+import Typography from '@mui/material/Typography';
 
-import { ThemeModeToggler } from './components';
+// import { NavItem } from './components';
+// import { Link } from '@mui/material';
+// import { ImageList } from '@mui/material/ImageList';
 
 const Topbar = ({ onSidebarOpen }) => {
   const theme = useTheme();
-  const { mode } = theme.palette;
+  // const { mode } = theme.palette;
+  // const {
+  //   // landings: landingPages,
+  //   // secondary: secondaryPages,
+  //   // company: companyPages,
+  //   // account: accountPages,
+  //   // portfolio: portfolioPages,
+  //   // blog: blogPages,
+  // } = pages;
 
   return (
     <Box
@@ -23,51 +34,82 @@ const Topbar = ({ onSidebarOpen }) => {
         display={'flex'}
         component="a"
         href="/"
-        title="theFront"
-        width={{ xs: 100, md: 120 }}
+        sx={{
+          textDecoration: 'none',
+          color: 'grey.900',
+          fontWeight: 'bold',
+        }}
       >
-        <Box
-          component={'img'}
-          src={
-            mode === 'light'
-              ? 'https://assets.maccarianagency.com/the-front/logos/logo.svg'
-              : 'https://assets.maccarianagency.com/the-front/logos/logo-negative.svg'
-          }
-          height={1}
-          width={1}
-        />
+        <img src={logo} alt="logo" />
+        <Typography
+          ontWeight={700}
+          variant={'h5'}
+          // gutterBottom
+          align={'center'}
+        >
+          <span
+            style={{ color: theme.palette.primary.main, fontWeight: 'bold' }}
+          >
+            Balloon Brace&reg;
+          </span>{' '}
+          <br />{' '}
+          <span
+            style={{ fontSize: '0.8em', color: theme.palette.primary.main }}
+          >
+            for Costal Flaring
+          </span>
+        </Typography>
       </Box>
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
-        <Box marginLeft={3}>
-          <Link underline="none" component="a" href="/" color="text.primary" fontWeight={600}>
-            Home
+        {/* <Box marginLeft={4}>
+          <Link
+            underline="none"
+            component="a"
+            href="/"
+            color="grey.700"
+            // variant={'subtitle1'}
+          >
+              Home
           </Link>
         </Box>
-        <Box marginLeft={3}>
-          <Link underline="none" component="a" href="/home" color="text.primary" fontWeight={600}>
-            All pages
+        <Box marginLeft={4}>
+          <Link
+            underline="none"
+            component="a"
+            href="/"
+            color="grey.700"
+            // variant={'subtitle1'}
+          >
+              What is Rib Flaring?
           </Link>
         </Box>
-        <Box marginLeft={3}>
-          <ThemeModeToggler />
-        </Box>
-        <Box marginLeft={3}>
+       
+        // <Box marginLeft={4}>
+        //   <Link
+        //     underline="none"
+        //     component="a"
+        //     href="/"
+        //     color="grey.700"
+        //     // variant={'subtitle1'}
+        //   >
+        //       This Braces&apos; Uniqueness?
+        //   </Link>
+        // </Box> */}
+
+        <Box marginLeft={4}>
           <Button
             variant="contained"
             color="primary"
             component="a"
-            target="blank"
-            href="https://MUI.com/store/items/the-front-landing-page/"
+            // target="blank"
+            href="#"
             size="large"
           >
-            Purchase now
+            Order now
           </Button>
         </Box>
       </Box>
-      <Box sx={{ display: { xs: 'flex', md: 'none' } }} alignItems={'center'}>
-        <Box marginRight={2}>
-          <ThemeModeToggler />
-        </Box>
+      <Box sx={{ display: { xs: 'block', md: 'none' } }} alignItems={'center'}>
         <Button
           onClick={() => onSidebarOpen()}
           aria-label="Menu"
@@ -88,6 +130,8 @@ const Topbar = ({ onSidebarOpen }) => {
 
 Topbar.propTypes = {
   onSidebarOpen: PropTypes.func,
+  pages: PropTypes.object,
+  colorInvert: PropTypes.bool,
 };
 
 export default Topbar;

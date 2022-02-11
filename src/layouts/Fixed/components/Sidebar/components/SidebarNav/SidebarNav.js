@@ -1,85 +1,127 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { alpha, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import CloseIcon from '@mui/icons-material/Close';
+import { alpha, useTheme } from '@mui/material/styles';
+import MenuIcon from '@mui/icons-material/Menu';
+import logo from '../../../../images/balloonbrace-logo.png';
+import Typography from '@mui/material/Typography';
 
-const SidebarNav = ({ pages, onClose }) => {
+// import { NavItem } from './components';
+// import { Link } from '@mui/material';
+// import { ImageList } from '@mui/material/ImageList';
+
+const SidebarNav = ({ onSidebarOpen }) => {
   const theme = useTheme();
-  const [activeLink, setActiveLink] = useState('');
-  useEffect(() => {
-    setActiveLink(window && window.location ? window.location.pathname : '');
-  }, []);
+  // const { mode } = theme.palette;
+  // const {
+  //   // landings: landingPages,
+  //   // secondary: secondaryPages,
+  //   // company: companyPages,
+  //   // account: accountPages,
+  //   // portfolio: portfolioPages,
+  //   // blog: blogPages,
+  // } = pages;
 
   return (
-    <Box paddingBottom={2}>
+    <Box
+      display={'flex'}
+      justifyContent={'space-between'}
+      alignItems={'center'}
+      width={1}
+    >
       <Box
-        justifyContent={'flex-end'}
-        onClick={() => onClose()}
-        display={{ xs: 'flex', md: 'none' }}
+        display={'flex'}
+        component="a"
+        href="/"
+        sx={{
+          textDecoration: 'none',
+          color: 'grey.900',
+          fontWeight: 'bold',
+        }}
       >
-        <CloseIcon fontSize="small" />
-      </Box>
-      <Box paddingX={2}>
-        {pages.map((item, i) => (
-          <Box key={i} marginBottom={3}>
-            <Typography
-              variant="caption"
-              sx={{
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                marginBottom: 1,
-                display: 'block',
-              }}
-            >
-              {item.groupTitle}
-            </Typography>
-            <Box>
-              {item.pages.map((p, i) => (
-                <Box marginBottom={1 / 2} key={i}>
-                  <Button
-                    component={'a'}
-                    href={p.href}
-                    target={p.target}
-                    fullWidth
-                    sx={{
-                      justifyContent: 'flex-start',
-                      color:
-                        activeLink === p.href
-                          ? theme.palette.primary.main
-                          : theme.palette.text.primary,
-                      backgroundColor:
-                        activeLink === p.href
-                          ? alpha(theme.palette.primary.main, 0.1)
-                          : 'transparent',
-                      fontWeight: activeLink === p.href ? 600 : 400,
-                    }}
-                  >
-                    {p.title}
-                  </Button>
-                </Box>
-              ))}
-            </Box>
-          </Box>
-        ))}
-      </Box>
-      <Box>
-        <Button variant="outlined" fullWidth component="a" href="/">
-          Browse pages
-        </Button>
-      </Box>
-      <Box marginTop={1}>
-        <Button
-          variant="contained"
-          color="primary"
-          fullWidth
-          component="a"
-          target="blank"
-          href="https://MUI.com/store/items/the-front-landing-page/"
+        <img src={logo} alt="logo" />
+        <Typography
+          ontWeight={700}
+          variant={'h5'}
+          // gutterBottom
+          align={'center'}
         >
-          Purchase now
+          <span
+            style={{ color: theme.palette.primary.main, fontWeight: 'bold' }}
+          >
+            Balloon Brace&reg;
+          </span>{' '}
+          <br />{' '}
+          <span
+            style={{ fontSize: '0.8em', color: theme.palette.primary.main }}
+          >
+            for Costal Flaring
+          </span>
+        </Typography>
+      </Box>
+      <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
+        {/* <Box marginLeft={4}>
+          <Link
+            underline="none"
+            component="a"
+            href="/"
+            color="grey.700"
+            // variant={'subtitle1'}
+          >
+              Home
+          </Link>
+        </Box>
+        <Box marginLeft={4}>
+          <Link
+            underline="none"
+            component="a"
+            href="/"
+            color="grey.700"
+            // variant={'subtitle1'}
+          >
+              What is Rib Flaring?
+          </Link>
+        </Box>
+       
+        // <Box marginLeft={4}>
+        //   <Link
+        //     underline="none"
+        //     component="a"
+        //     href="/"
+        //     color="grey.700"
+        //     // variant={'subtitle1'}
+        //   >
+        //       This Braces&apos; Uniqueness?
+        //   </Link>
+        // </Box> */}
+
+        <Box marginLeft={4}>
+          <Button
+            variant="contained"
+            color="primary"
+            component="a"
+            // target="blank"
+            href="#"
+            size="large"
+          >
+            Order now
+          </Button>
+        </Box>
+      </Box>
+      <Box sx={{ display: { xs: 'block', md: 'none' } }} alignItems={'center'}>
+        <Button
+          onClick={() => onSidebarOpen()}
+          aria-label="Menu"
+          variant={'outlined'}
+          sx={{
+            borderRadius: 2,
+            minWidth: 'auto',
+            padding: 1,
+            borderColor: alpha(theme.palette.divider, 0.2),
+          }}
+        >
+          <MenuIcon />
         </Button>
       </Box>
     </Box>
@@ -87,8 +129,9 @@ const SidebarNav = ({ pages, onClose }) => {
 };
 
 SidebarNav.propTypes = {
-  pages: PropTypes.array.isRequired,
-  onClose: PropTypes.func,
+  onSidebarOpen: PropTypes.func,
+  pages: PropTypes.object,
+  colorInvert: PropTypes.bool,
 };
 
 export default SidebarNav;

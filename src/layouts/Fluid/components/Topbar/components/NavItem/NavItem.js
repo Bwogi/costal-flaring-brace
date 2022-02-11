@@ -1,139 +1,137 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { alpha, useTheme } from '@mui/material/styles';
-import Popover from '@mui/material/Popover';
+import MenuIcon from '@mui/icons-material/Menu';
+import logo from '../../../../images/balloonbrace-logo.png';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-const NavItem = ({ title, id, items }) => {
+// import { NavItem } from './components';
+// import { Link } from '@mui/material';
+// import { ImageList } from '@mui/material/ImageList';
+
+const NavItem = ({ onSidebarOpen }) => {
   const theme = useTheme();
-
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [openedPopoverId, setOpenedPopoverId] = useState(null);
-
-  const handleClick = (event, popoverId) => {
-    setAnchorEl(event.target);
-    setOpenedPopoverId(popoverId);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-    setOpenedPopoverId(null);
-  };
-
-  const [activeLink, setActiveLink] = useState('');
-  useEffect(() => {
-    setActiveLink(window && window.location ? window.location.pathname : '');
-  }, []);
-
-  const hasActiveLink = () => items.find(i => i.href === activeLink);
+  // const { mode } = theme.palette;
+  // const {
+  //   // landings: landingPages,
+  //   // secondary: secondaryPages,
+  //   // company: companyPages,
+  //   // account: accountPages,
+  //   // portfolio: portfolioPages,
+  //   // blog: blogPages,
+  // } = pages;
 
   return (
-    <Box>
+    <Box
+      display={'flex'}
+      justifyContent={'space-between'}
+      alignItems={'center'}
+      width={1}
+    >
       <Box
         display={'flex'}
-        alignItems={'center'}
-        aria-describedby={id}
-        sx={{ cursor: 'pointer' }}
-        onClick={(e) => handleClick(e, id)}
-      >
-        <Typography color={(openedPopoverId === id || hasActiveLink()) ? 'primary' : 'text.primary'}>
-          {title}
-        </Typography>
-        <ExpandMoreIcon
-          sx={{
-            marginLeft: theme.spacing(1/4),
-            width: 16,
-            height: 16,
-            transform: openedPopoverId === id ? 'rotate(180deg)' : 'none',
-            color:
-              (openedPopoverId === id || hasActiveLink())
-                ? theme.palette.primary.dark
-                : theme.palette.text.primary,
-          }}
-        />
-      </Box>
-      <Popover
-        elevation={3}
-        id={id}
-        open={openedPopoverId === id}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
+        component="a"
+        href="/"
         sx={{
-          '.MuiPaper-root': {
-            maxWidth: items.length > 12 ? 350 : 250,
-            padding: 2,
-            marginTop: 2,
-            borderTopRightRadius: 0,
-            borderTopLeftRadius: 0,
-            borderBottomRightRadius: 8,
-            borderBottomLeftRadius: 8,
-            borderTop: `3px solid ${theme.palette.primary.main}`,
-          },
+          textDecoration: 'none',
+          color: 'grey.900',
+          fontWeight: 'bold',
         }}
       >
-        <Grid container spacing={0.5}>
-          {items.map((p, i) => (
-            <Grid item key={i} xs={items.length > 12 ? 6 : 12}>
-              <Button
-                size={'large'}
-                component={'a'}
-                href={p.href}
-                fullWidth
-                sx={{
-                  justifyContent: 'flex-start',
-                  color:
-                    activeLink === p.href
-                      ? theme.palette.primary.main
-                      : theme.palette.text.primary,
-                  backgroundColor:
-                    activeLink === p.href
-                      ? alpha(theme.palette.primary.main, 0.1)
-                      : 'transparent',
-                  fontWeight: activeLink === p.href ? 600 : 400,
-                }}
-              >
-                {p.title}
-                {p.isNew && (
-                  <Box
-                    padding={0.5}
-                    display={'inline-flex'}
-                    borderRadius={1}
-                    bgcolor={'primary.main'}
-                    marginLeft={2}
-                  >
-                    <Typography
-                      variant={'caption'}
-                      sx={{ color: 'common.white', lineHeight: 1 }}
-                    >
-                      new
-                    </Typography>
-                  </Box>
-                )}
-              </Button>
-            </Grid>
-          ))}
-        </Grid>
-      </Popover>
+        <img src={logo} alt="logo" />
+        <Typography
+          ontWeight={700}
+          variant={'h5'}
+          // gutterBottom
+          align={'center'}
+        >
+          <span
+            style={{ color: theme.palette.primary.main, fontWeight: 'bold' }}
+          >
+            Balloon Brace&reg;
+          </span>{' '}
+          <br />{' '}
+          <span
+            style={{ fontSize: '0.8em', color: theme.palette.primary.main }}
+          >
+            for Costal Flaring
+          </span>
+        </Typography>
+      </Box>
+      <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
+        {/* <Box marginLeft={4}>
+          <Link
+            underline="none"
+            component="a"
+            href="/"
+            color="grey.700"
+            // variant={'subtitle1'}
+          >
+              Home
+          </Link>
+        </Box>
+        <Box marginLeft={4}>
+          <Link
+            underline="none"
+            component="a"
+            href="/"
+            color="grey.700"
+            // variant={'subtitle1'}
+          >
+              What is Rib Flaring?
+          </Link>
+        </Box>
+       
+        // <Box marginLeft={4}>
+        //   <Link
+        //     underline="none"
+        //     component="a"
+        //     href="/"
+        //     color="grey.700"
+        //     // variant={'subtitle1'}
+        //   >
+        //       This Braces&apos; Uniqueness?
+        //   </Link>
+        // </Box> */}
+
+        <Box marginLeft={4}>
+          <Button
+            variant="contained"
+            color="primary"
+            component="a"
+            // target="blank"
+            href="#"
+            size="large"
+          >
+            Order now
+          </Button>
+        </Box>
+      </Box>
+      <Box sx={{ display: { xs: 'block', md: 'none' } }} alignItems={'center'}>
+        <Button
+          onClick={() => onSidebarOpen()}
+          aria-label="Menu"
+          variant={'outlined'}
+          sx={{
+            borderRadius: 2,
+            minWidth: 'auto',
+            padding: 1,
+            borderColor: alpha(theme.palette.divider, 0.2),
+          }}
+        >
+          <MenuIcon />
+        </Button>
+      </Box>
     </Box>
   );
 };
 
 NavItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  items: PropTypes.array.isRequired,
+  onSidebarOpen: PropTypes.func,
+  pages: PropTypes.object,
+  colorInvert: PropTypes.bool,
 };
 
 export default NavItem;
